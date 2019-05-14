@@ -31,11 +31,11 @@ local config = {
 
 local configPath = paths.user.applicationData .. "Nanomachines/Config.cfg"
 if fs.exists(configPath) then
-	config = filesystem.readTable(configPath)
+	config = fs.readTable(configPath)
 end
 
 local function saveConfig()
-	filesystem.writeTable(configPath, config)
+	fs.writeTable(configPath, config)
 end
 
 --------------------------------------------------------------------------------
