@@ -1,6 +1,6 @@
 
 
-local number = require("Number")
+local number = require("number")
 local GUI = require("GUI")
 local screen = require("Screen")
 local color = require("Color")
@@ -24,7 +24,7 @@ local function updateProxy(name)
 	end
 end
 
-local function print(model, number)
+local function print(model, amount)
 	local proxy = proxies.printer3d
 
 	proxy.reset()
@@ -58,7 +58,7 @@ local function print(model, number)
 		proxy.addShape(shape[1], shape[2], shape[3], shape[4], shape[5], shape[6], shape.texture or "empty", shape.state, shape.tint)
 	end
 
-	local success, reason = proxy.commit(number)
+	local success, reason = proxy.commit(amount)
 	if not success then
 		GUI.alert(localization.failedToPrint .. ": " .. reason)
 	end
