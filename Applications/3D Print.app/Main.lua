@@ -24,7 +24,7 @@ local function updateProxy(name)
 	end
 end
 
-local function print(model)
+local function print(model, number)
 	local proxy = proxies.printer3d
 
 	proxy.reset()
@@ -58,7 +58,7 @@ local function print(model)
 		proxy.addShape(shape[1], shape[2], shape[3], shape[4], shape[5], shape[6], shape.texture or "empty", shape.state, shape.tint)
 	end
 
-	local success, reason = proxy.commit(1)
+	local success, reason = proxy.commit(number)
 	if not success then
 		GUI.alert(localization.failedToPrint .. ": " .. reason)
 	end
@@ -67,7 +67,7 @@ end
 -- Just printing without UI
 if options.p then
 	updateProxy("printer3d")
-	print(filesystem.readTable(args[1]))
+	print(filesystem.readTable(args[1]), (args[1] or 1))
 	return
 end
 
@@ -282,6 +282,10 @@ local function updateHologramWidgets()
 	hologramWidgetsLayout:removeChildren()
 	addObjectsTo(hologramWidgetsLayout, objects)
 end
+
+local printNumberSlider = addSlider(1, 64, 0, false, "localization.numberToQueue" .. ": ", "")
+printNumberSlider.height = 2
+printNumberSlider.roundValues = true
 
 local function updateProxies()
 	updateProxy("hologram")
@@ -672,7 +676,7 @@ removeShapeButton.onTouch = function()
 end
 
 printButton.onTouch = function()
-	print(model)
+	print(model, printNumberSlider.value)
 end
 
 elementComboBox.onItemSelected = function()
