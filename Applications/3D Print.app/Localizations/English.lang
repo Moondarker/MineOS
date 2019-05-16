@@ -39,4 +39,5 @@
 	projectorSettings = "Projector properties",
 	elementSettings = "Shape properties",
 	failedToPrint = "Failed to print",
+	numberToQueue = "Number"
 }
